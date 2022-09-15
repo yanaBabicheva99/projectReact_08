@@ -56,7 +56,7 @@ const TextField = ({label, type, value, name, error, onChange, placeholder, cust
 TextField.propTypes = {
     label: PropTypes.string,
     type: PropTypes.string,
-    value: PropTypes.string.isRequired,
+    value: PropTypes.string,
     name: PropTypes.string.isRequired,
     onChange: PropTypes.func,
     error: PropTypes.string,
@@ -69,4 +69,4 @@ TextField.defaultProps = {
     label: '',
     customStyle: false
 };
-export default TextField;
+export default React.memo(TextField);

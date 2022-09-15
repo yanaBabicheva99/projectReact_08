@@ -60,6 +60,7 @@ const UsersListPage = () => {
 
     const clearFilter = () => {
         setSelectedProf();
+        // setCurrentPage(1);
     };
 
     const handleSort = (item) => {

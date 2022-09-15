@@ -45,11 +45,11 @@ const SelectField = ({label, value, onChange, defaultOption, options, error, nam
 };
 SelectField.propTypes = {
     label: PropTypes.string.isRequired,
-    value: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
     defaultOption: PropTypes.string,
     options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     error: PropTypes.string,
     name: PropTypes.string
 };
-export default SelectField;
+export default React.memo(SelectField);
