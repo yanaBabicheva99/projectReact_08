@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import style from './textFieldStyle/textField.module.css';
-const TextField = ({label, type, value, name, error, onChange, placeholder, customStyle}) => {
+const TextField = ({label, type, value, name, error, onChange, placeholder, customStyle, ...rest}) => {
     const [showPassword, setShowPassword] = useState(false);
     const handelChange = ({target}) => {
         onChange({name: target.name, value: target.value});
@@ -37,6 +37,7 @@ const TextField = ({label, type, value, name, error, onChange, placeholder, cust
                             id={name}
                             onChange={handelChange}
                             className={getInputClasses()}
+                            {...rest}
                         />
                         {type === 'password' && (
                             <button

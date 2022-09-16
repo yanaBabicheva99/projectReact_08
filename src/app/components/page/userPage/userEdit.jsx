@@ -52,14 +52,12 @@ const UserEdit = ({id}) => {
     };
 
     const handelSubmit = (data) => {
-        console.log(data);
         const {profession} = data;
         const updatedUser = {
             ...data,
             profession: getProfessionById(profession)
         };
-        api.users.update(id, updatedUser).then(user => console.log(user));
-        history.push(`/users/${id}`);
+        api.users.update(id, updatedUser).then(user => history.push(`/users/${user._id}`));
     };
     return (
         <div className='container mt-5'>
@@ -76,6 +74,7 @@ const UserEdit = ({id}) => {
                                     <TextField
                                         name='name'
                                         label='Имя'
+                                        autoFocus
                                     />
                                     <TextField
                                         name='email'

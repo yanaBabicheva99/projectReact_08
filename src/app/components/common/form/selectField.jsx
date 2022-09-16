@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-const SelectField = ({label, value, onChange, defaultOption, options, error, name}) => {
+const SelectField = ({label, value, onChange, defaultOption, options, error, name, ...rest}) => {
     const optionsArray =
         !Array.isArray(options) && typeof options === 'object'
             ? Object.values(options)
@@ -22,6 +22,7 @@ const SelectField = ({label, value, onChange, defaultOption, options, error, nam
                 name={name}
                 value={value}
                 onChange={handelChange}
+                {...rest}
             >
                 <option disabled value="">
                     {defaultOption}

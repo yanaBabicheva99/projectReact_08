@@ -14,11 +14,12 @@ const FormComponent = ({children, validatorConfig, onSubmit, defaultData}) => {
 
     const isValid = Object.keys(errors).length === 0;
 
-    const validate = () => {
+    const validate = useCallback((data) => {
         const errors = validator(data, validatorConfig);
         setErrors(errors);
         return Object.keys(errors).length === 0;
-    };
+    }, [validatorConfig, setErrors]);
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const isValid = validate();
@@ -27,8 +28,17 @@ const FormComponent = ({children, validatorConfig, onSubmit, defaultData}) => {
         console.log(data);
     };
     useEffect(() => {
-        if (Object.keys(data).length > 0) validate();
+        if (Object.keys(data).length > 0) validate(data);
     }, [data]);
+
+    const handleKeyDown = useCallback((event) => {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            const form = event.target.form;
+            const indexField = Array.prototype.indexOf.call(form, event.target);
+            form.elements[indexField + 1].focus();
+        }
+    }, []);
 
     const clonedElements = React.Children.map(children, (child) => {
         const childType = typeof child.type;
@@ -42,7 +52,8 @@ const FormComponent = ({children, validatorConfig, onSubmit, defaultData}) => {
                 ...child.props,
                 onChange: handelChange,
                 value: data[child.props.name] || '',
-                error: errors[child.props.name]
+                error: errors[child.props.name],
+                onKeyDown: handleKeyDown
             };
         }
         if (childType === 'string') {
